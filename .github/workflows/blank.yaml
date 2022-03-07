@@ -10,5 +10,5 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - uses: ./
-    with:
-      NOTION_TOKEN: ${{secrets.NOTION_TOKEN}}
+      with:
+        NOTION_TOKEN: ${{secrets.NOTION_TOKEN}}

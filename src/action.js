@@ -1,12 +1,13 @@
-const core = require('@actions/core');
-const github = require('@actions/github');
-const { Client } = require("@notionhq/client")
-const NOTION_TOKEN = core.getInput('NOTION_TOKEN');
-// Initializing a client
-const notion = new Client({
-  auth: NOTION_TOKEN,
-})
+
 async function run() {
+  const core = require('@actions/core');
+  const github = require('@actions/github');
+  const { Client } = require("@notionhq/client")
+  const NOTION_TOKEN = core.getInput('NOTION_TOKEN');
+  // Initializing a client
+  const notion = new Client({
+    auth: NOTION_TOKEN,
+  })
   console.log('Hello, world!');
 
   const databaseId = 'a973e59126804e55b92eb3d5aca39ed1';
