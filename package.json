@@ -18,6 +18,9 @@
   },
   "homepage": "https://github.com/rustyty/notion-actions#readme",
   "dependencies": {
+    "@actions/core": "^1.6.0",
+    "@actions/github": "^5.0.0",
+    "@notionhq/client": "^1.0.1",
     "@vercel/ncc": "^0.33.3",
     "express": "^4.17.3"
   }
