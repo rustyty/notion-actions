@@ -1,0 +1,24 @@
+{
+  "name": "notion-actions",
+  "version": "1.0.0",
+  "description": "notion-actions",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "ncc build src/action.js -o dist"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rustyty/notion-actions.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/rustyty/notion-actions/issues"
+  },
+  "homepage": "https://github.com/rustyty/notion-actions#readme",
+  "dependencies": {
+    "@vercel/ncc": "^0.33.3",
+    "express": "^4.17.3"
+  }
+}
