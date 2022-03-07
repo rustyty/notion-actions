@@ -9334,18 +9334,20 @@ var __webpack_exports__ = {};
 const core = __nccwpck_require__(2186);
 const github = __nccwpck_require__(5438);
 const { Client } = __nccwpck_require__(324)
-const NOTION_TOKEN = core.getInput('NOTION_TOKEN');
-// Initializing a client
-const notion = new Client({
-  auth: NOTION_TOKEN,
-})
+
 async function run() {
+
+  const NOTION_TOKEN = core.getInput('NOTION_TOKEN');
+  // Initializing a client
+  const notion = new Client({
+    auth: NOTION_TOKEN,
+  })
   console.log('Hello, world!');
 
   const databaseId = 'a973e59126804e55b92eb3d5aca39ed1';
   const response = await notion.pages.create({
     parent: {
-      databaseId,
+      database_id: databaseId,
     },
     properties: {
       'Name': {
