@@ -38045,7 +38045,7 @@ const notion = new Client({
 })
 
 const GITHUB_NOTION_DICTONARY = {
-  "Tom-Ellistat": "alexis.menetrey@ellistat.com"
+  "Tom-Ellistat": "dad345da-b7ef-4a4d-b37e-3089ea379b0f"
 }
 const gitHubPRsIDToNotionPageId = {}
 
@@ -38090,10 +38090,10 @@ function usersGithubToNotion(users) {
   for (const user of users) {
     const p = GITHUB_NOTION_DICTONARY[user.login]
     if (p) {
-      person.push(p)
+      person.push({ object: "user", id: p })
     }
   }
-  return { email: person };
+  return person;
 }
 async function syncPRNotionDatabaseWithGitHub() {
   // Get all PRs currently in the provided GitHub repository.
