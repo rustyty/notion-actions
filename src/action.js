@@ -44,6 +44,10 @@ run();
 function getParamsFromPR(PR) {
   const { title, number, state, html_url, created_at, requested_reviewers, user, body } = PR
   const data = {
+    icon: {
+      type: "emoji",
+      emoji: "🍗"
+    },
     properties: {
       Name: {
         title: [{ type: "text", text: { content: title } }],
