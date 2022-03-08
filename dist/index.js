@@ -9343,7 +9343,7 @@ async function run() {
     auth: NOTION_TOKEN,
   })
   console.log('Hello, world!');
-  const databaseId = 'a973e59126804e55b92eb3d5aca39ed1';
+  const databaseId = 'd79598c718644e939f8b5e13d0dca4c9';
   const listUsersResponse = await notion.users.list({});
   console.log(listUsersResponse)
   const ddd = await notion.databases.retrieve({ database_id: databaseId })
