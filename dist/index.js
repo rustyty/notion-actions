@@ -9337,7 +9337,7 @@ const { Client } = __nccwpck_require__(324)
 
 async function run() {
 
-  const NOTION_TOKEN = core.getInput('NOTION_TOKEN');
+  const NOTION_TOKEN = process.env.NOTION_TOKEN;
   // Initializing a client
   const notion = new Client({
     auth: NOTION_TOKEN,

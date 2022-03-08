@@ -4,7 +4,7 @@ const { Client } = require("@notionhq/client")
 
 async function run() {
 
-  const NOTION_TOKEN = core.getInput('NOTION_TOKEN');
+  const NOTION_TOKEN = process.env.NOTION_TOKEN;
   // Initializing a client
   const notion = new Client({
     auth: NOTION_TOKEN,
