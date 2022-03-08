@@ -10,11 +10,11 @@ async function run() {
     auth: NOTION_TOKEN,
   })
   console.log('Hello, world!');
+  const databaseId = 'a973e59126804e55b92eb3d5aca39ed1';
   const listUsersResponse = await notion.users.list({});
   console.log(listUsersResponse)
-  const ddd = await notion.databases.query()
-  console.log(ddd)
-  const databaseId = 'a973e59126804e55b92eb3d5aca39ed1';
+  const ddd = await notion.databases.retrieve({ database_id: databaseId })
+  console.log(ddd);
   const response = await notion.pages.create({
     parent: {
       database_id: databaseId,
