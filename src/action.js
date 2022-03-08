@@ -41,7 +41,7 @@ run();
 
 
 function getPropertiesFromPR(PR) {
-  const { title, number, state, html_url, created_at } = PR
+  const { title, number, state, html_url, created_at, requested_reviewers } = PR
   return {
     Name: {
       title: [{ type: "text", text: { content: title } }],
@@ -60,7 +60,7 @@ function getPropertiesFromPR(PR) {
     },
     "Reviewers": {
       person: {
-        email: usersGithubToNotion(pr.requested_reviewers)
+        email: usersGithubToNotion(requested_reviewers)
       }
     }
   }
