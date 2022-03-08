@@ -38044,6 +38044,9 @@ const notion = new Client({
   auth: NOTION_TOKEN,
 })
 
+const GITHUB_NOTION_DICTONARY = {
+  "Tom-Ellistat": "alexis.menetrey@ellistat.com"
+}
 const gitHubPRsIDToNotionPageId = {}
 
 async function run() {
@@ -38075,11 +38078,25 @@ function getPropertiesFromPR(PR) {
     },
     "Date": {
       date: { start: created_at }
+    },
+    "Reviewers": {
+      person: {
+        email: usersGithubToNotion(pr.requested_reviewers)
+      }
     }
   }
 }
 
-
+function usersGithubToNotion(users) {
+  let person = [];
+  for (const user of users) {
+    const p = GITHUB_NOTION_DICTONARY[user.login]
+    if (p) {
+      person.push(p)
+    }
+  }
+  return person;
+}
 async function syncPRNotionDatabaseWithGitHub() {
   // Get all PRs currently in the provided GitHub repository.
   await setInitialGitHubToNotionIdMap();
