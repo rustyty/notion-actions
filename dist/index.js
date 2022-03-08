@@ -20804,7 +20804,7 @@ const {
 } = process.env;
 
 
-const octokit = new github.GitHub(GITHUB_TOKEN);
+const octokit = new Octokit({ auth: GITHUB_TOKEN });
 const databaseId = 'd79598c718644e939f8b5e13d0dca4c9';
 
 const [owner, repo] = GITHUB_REPOSITORY.split("/");
