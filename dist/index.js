@@ -38183,8 +38183,7 @@ async function getPullRequest() {
   const PRs = await octokit.rest.pulls.list({
     ...repoInfo,
   });
-  console.log(PRs)
-  return PRs;
+  return PRs.data;
 }
 })();
 
