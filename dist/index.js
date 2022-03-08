@@ -38085,7 +38085,7 @@ function getParamsFromPR(PR) {
         people: usersGithubToNotion(requested_reviewers)
       },
       "By": {
-        people: usersGithubToNotion(user)
+        people: usersGithubToNotion([user])
       }
     }
   }
