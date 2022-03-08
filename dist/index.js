@@ -20796,6 +20796,7 @@ const { Client } = __nccwpck_require__(324)
 const { Octokit } = __nccwpck_require__(7467);
 
 const GITHUB_TOKEN = core.getInput('GITHUB_TOKEN');
+console.log(GITHUB_TOKEN)
 const octokit = new Octokit({ auth: GITHUB_TOKEN })
 const NOTION_TOKEN = process.env.NOTION_TOKEN;
 const databaseId = 'd79598c718644e939f8b5e13d0dca4c9';
