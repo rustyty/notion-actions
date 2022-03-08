@@ -23,6 +23,7 @@ const notion = new Client({
   auth: NOTION_TOKEN,
 })
 
+const gitHubPRsIDToNotionPageId = {}
 
 async function run() {
 
@@ -56,21 +57,21 @@ function getPropertiesFromPR(PR) {
 
 
 async function syncPRNotionDatabaseWithGitHub() {
-  // Get all issues currently in the provided GitHub repository.
+  // Get all PRs currently in the provided GitHub repository.
   await setInitialGitHubToNotionIdMap();
   console.log("\nFetching PRs from Notion DB...")
   const PRs = await getPullRequest()
   console.log(`Fetched ${PRs.length} PRs from GitHub repository.`)
 
-  // Group issues into those that need to be created or updated in the Notion database.
+  // Group PRs into those that need to be created or updated in the Notion database.
   const { pagesToCreate, pagesToUpdate } = getNotionPRs(PRs)
 
-  // Create pages for new issues.
-  console.log(`\n${pagesToCreate.length} new issues to add to Notion.`)
+  // Create pages for new PRs.
+  console.log(`\n${pagesToCreate.length} new PRs to add to Notion.`)
   await createPages(pagesToCreate)
 
-  // Updates pages for existing issues.
-  console.log(`\n${pagesToUpdate.length} issues to update in Notion.`)
+  // Updates pages for existing PRs.
+  console.log(`\n${pagesToUpdate.length} PRs to update in Notion.`)
   await updatePages(pagesToUpdate)
 
   // Success!
@@ -116,7 +117,7 @@ async function getPRsFromNotion() {
     }
     cursor = next_cursor
   }
-  console.log(`${pages.length} issues successfully fetched.`)
+  console.log(`${pages.length} PRs successfully fetched.`)
   return pages.map(page => {
     return {
       pageId: page.id,
