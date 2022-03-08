@@ -48,7 +48,7 @@ async function run() {
   console.log(response);
 
   async function getPullRequest() {
-    const openPRs = await octokit.pulls.list({
+    const openPRs = await octokit.rest.pulls.list({
       ...repoInfo,
     });
     console.log(openPRs);
