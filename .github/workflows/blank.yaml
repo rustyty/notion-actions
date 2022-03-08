@@ -11,4 +11,5 @@ jobs:
     - uses: actions/checkout@v2
     - uses: ./
       env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         NOTION_TOKEN: ${{secrets.NOTION_TOKEN}}

@@ -9162,6 +9162,14 @@ module.exports = eval("require")("encoding");
 
 /***/ }),
 
+/***/ 5158:
+/***/ ((module) => {
+
+module.exports = eval("require")("octokit");
+
+
+/***/ }),
+
 /***/ 9491:
 /***/ ((module) => {
 
@@ -9334,20 +9342,23 @@ var __webpack_exports__ = {};
 const core = __nccwpck_require__(2186);
 const github = __nccwpck_require__(5438);
 const { Client } = __nccwpck_require__(324)
+const { Octokit } = __nccwpck_require__(5158);
+
+const GITHUB_TOKEN = core.getInput('GITHUB_TOKEN');
+const octokit = new Octokit({ auth: GITHUB_TOKEN })
+const NOTION_TOKEN = process.env.NOTION_TOKEN;
+const databaseId = 'd79598c718644e939f8b5e13d0dca4c9';
+
 
 async function run() {
 
-  const NOTION_TOKEN = process.env.NOTION_TOKEN;
   // Initializing a client
   const notion = new Client({
     auth: NOTION_TOKEN,
   })
   console.log('Hello, world!');
-  const databaseId = 'd79598c718644e939f8b5e13d0dca4c9';
-  const listUsersResponse = await notion.users.list({});
-  console.log(listUsersResponse)
-  const ddd = await notion.databases.retrieve({ database_id: databaseId })
-  console.log(ddd);
+
+  await getPullRequest();
   const response = await notion.pages.create({
     parent: {
       database_id: databaseId,
@@ -9367,8 +9378,13 @@ async function run() {
     },
   });
   console.log(response);
-}
 
+  async function getPullRequest() {
+    const pr = await octokit.rest.pulls.get({});
+    console.log(pr);
+    return pr;
+  }
+}
 run();
 })();
 
