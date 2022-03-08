@@ -69,21 +69,22 @@ function getParamsFromPR(PR) {
     }
   }
   if (body) {
-    data.children =
-    {
-      object: 'block',
-      type: 'paragraph',
-      paragraph: {
-        rich_text: [
-          {
-            type: 'text',
-            text: {
-              content: body,
+    data.children = [
+      {
+        object: 'block',
+        type: 'paragraph',
+        paragraph: {
+          rich_text: [
+            {
+              type: 'text',
+              text: {
+                content: body,
+              },
             },
-          },
-        ],
-      },
-    }
+          ],
+        },
+      }
+    ]
   }
   return data
 }
