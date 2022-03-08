@@ -53,7 +53,7 @@ function getPropertiesFromPR(PR) {
       url: html_url,
     },
     "Date": {
-      date: new Date(created_at)
+      date: { start: created_at }
     }
   }
 }
