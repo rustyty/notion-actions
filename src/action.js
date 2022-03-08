@@ -164,6 +164,7 @@ async function updatePages(pagesToUpdate) {
 async function getPullRequest() {
   const PRs = await octokit.rest.pulls.list({
     ...repoInfo,
+    state: "all"
   });
   return PRs.data;
 }
