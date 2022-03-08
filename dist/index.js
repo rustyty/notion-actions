@@ -20795,12 +20795,20 @@ const github = __nccwpck_require__(5438);
 const { Client } = __nccwpck_require__(324)
 const { Octokit } = __nccwpck_require__(7467);
 
-const GITHUB_TOKEN = core.getInput('GITHUB_TOKEN');
-console.log(GITHUB_TOKEN)
-const octokit = new Octokit({ auth: GITHUB_TOKEN })
-const NOTION_TOKEN = process.env.NOTION_TOKEN;
+
+const {
+  SNIPPET_ENDPOINT,
+  GITHUB_REPOSITORY,
+  GITHUB_TOKEN,
+  NOTION_TOKEN,
+} = process.env;
+
+
+const octokit = new github.GitHub(GITHUB_TOKEN);
 const databaseId = 'd79598c718644e939f8b5e13d0dca4c9';
 
+const [owner, repo] = GITHUB_REPOSITORY.split("/");
+const repoInfo = { owner, repo };
 
 async function run() {
 
@@ -20832,9 +20840,11 @@ async function run() {
   console.log(response);
 
   async function getPullRequest() {
-    const pr = await octokit.rest.pulls.get({});
-    console.log(pr);
-    return pr;
+    const openPRs = await octokit.pulls.list({
+      ...repoInfo,
+    });
+    console.log(openPRs);
+    return openPRs;
   }
 }
 run();
