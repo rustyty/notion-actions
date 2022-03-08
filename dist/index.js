@@ -38045,7 +38045,8 @@ const notion = new Client({
 })
 
 const GITHUB_NOTION_DICTONARY = {
-  "Tom-Ellistat": "dad345da-b7ef-4a4d-b37e-3089ea379b0f"
+  "Tom-Ellistat": "dad345da-b7ef-4a4d-b37e-3089ea379b0f",
+  "rustyty": "dad345da-b7ef-4a4d-b37e-3089ea379b0f"
 }
 const gitHubPRsIDToNotionPageId = {}
 
@@ -38061,28 +38062,51 @@ async function run() {
 run();
 
 
-function getPropertiesFromPR(PR) {
-  const { title, number, state, html_url, created_at, requested_reviewers } = PR
-  return {
-    Name: {
-      title: [{ type: "text", text: { content: title } }],
-    },
-    "#": {
-      number,
-    },
-    State: {
-      select: { name: state },
-    },
-    "URL": {
-      url: html_url,
-    },
-    "Date": {
-      date: { start: created_at }
-    },
-    "Reviewers": {
-      people: usersGithubToNotion(requested_reviewers)
+function getParamsFromPR(PR) {
+  const { title, number, state, html_url, created_at, requested_reviewers, body } = PR
+  const data = {
+    properties: {
+      Name: {
+        title: [{ type: "text", text: { content: title } }],
+      },
+      "#": {
+        number,
+      },
+      State: {
+        select: { name: state },
+      },
+      "URL": {
+        url: html_url,
+      },
+      "Date": {
+        date: { start: created_at }
+      },
+      "Reviewers": {
+        people: usersGithubToNotion(requested_reviewers)
+      },
+      "By": {
+        people: usersGithubToNotion(requested_reviewers)
+      }
     }
   }
+  if (body) {
+    data.children =
+    {
+      object: 'block',
+      type: 'paragraph',
+      paragraph: {
+        rich_text: [
+          {
+            type: 'text',
+            text: {
+              content: body,
+            },
+          },
+        ],
+      },
+    }
+  }
+  return data
 }
 
 function usersGithubToNotion(users) {
@@ -38174,7 +38198,7 @@ async function createPages(pagesToCreate) {
           parent: {
             database_id: databaseId,
           },
-          properties: getPropertiesFromPR(PR),
+          ...getParamsFromPR(PR)
         })
       )
     )
@@ -38189,7 +38213,7 @@ async function updatePages(pagesToUpdate) {
       pagesToUpdateBatch.map(({ pageId, ...PR }) =>
         notion.pages.update({
           page_id: pageId,
-          properties: getPropertiesFromPR(PR),
+          ...getParamsFromPR(PR)
         })
       )
     )
