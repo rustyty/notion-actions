@@ -23,6 +23,7 @@
     "@notionhq/client": "^1.0.1",
     "@vercel/ncc": "^0.33.3",
     "express": "^4.17.3",
+    "lodash": "^4.17.21",
     "octokit": "^1.7.1"
   }
 }
