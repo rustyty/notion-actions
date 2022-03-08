@@ -38080,9 +38080,7 @@ function getPropertiesFromPR(PR) {
       date: { start: created_at }
     },
     "Reviewers": {
-      person: {
-        email: usersGithubToNotion(requested_reviewers)
-      }
+      people: usersGithubToNotion(requested_reviewers)
     }
   }
 }
