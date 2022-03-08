@@ -38074,7 +38074,7 @@ function getPropertiesFromPR(PR) {
       url: html_url,
     },
     "Date": {
-      date: created_at
+      date: new Date(created_at)
     }
   }
 }
