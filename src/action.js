@@ -72,7 +72,7 @@ function usersGithubToNotion(users) {
       person.push(p)
     }
   }
-  return person;
+  return { email: person };
 }
 async function syncPRNotionDatabaseWithGitHub() {
   // Get all PRs currently in the provided GitHub repository.
