@@ -38,7 +38,7 @@ run();
 
 
 function getPropertiesFromPR(PR) {
-  const { title, number, state, comment_count, url } = PR
+  const { title, number, state, html_url, created_at } = PR
   return {
     Name: {
       title: [{ type: "text", text: { content: title } }],
@@ -50,8 +50,11 @@ function getPropertiesFromPR(PR) {
       select: { name: state },
     },
     "URL": {
-      url,
+      url: html_url,
     },
+    "Date": {
+      date: created_at
+    }
   }
 }
 
