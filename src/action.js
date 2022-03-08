@@ -42,7 +42,7 @@ run();
 
 
 function getParamsFromPR(PR) {
-  const { title, number, state, html_url, created_at, requested_reviewers, body } = PR
+  const { title, number, state, html_url, created_at, requested_reviewers, user, body } = PR
   const data = {
     properties: {
       Name: {
@@ -64,7 +64,7 @@ function getParamsFromPR(PR) {
         people: usersGithubToNotion(requested_reviewers)
       },
       "By": {
-        people: usersGithubToNotion(requested_reviewers)
+        people: usersGithubToNotion(user)
       }
     }
   }
